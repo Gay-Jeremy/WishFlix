@@ -59,14 +59,18 @@
         <p class="wishflix-catalogue__subtitle">Decouvre notre selection de jeux video</p>
       </div>
 
+      
       <div
-        class="stats shadow wishflix-catalogue__stats"
-        role="group"
-        aria-label="Statistiques catalogue"
+      class="stats shadow wishflix-catalogue__stats"
+      role="group"
+      aria-label="Statistiques catalogue"
       >
-        <div class="stat">
-          <div class="stat-title">Jeux disponibles</div>
-          <div class="stat-value text-primary">{{ games().length }}</div>
+      <button type="button" class="btn btn-primary" (click)="filterByAvailibility()">
+        {{filterAvailibilityLabel()}}
+      </button>
+      <div class="stat">
+        <div class="stat-title">Jeux disponibles</div>
+        <div class="stat-value text-primary">{{ visibleGames().length }}</div>
         </div>
 
         <div class="stat">
@@ -76,7 +80,7 @@
       </div>
 
       <div class="wishflix-catalogue__grid">
-        @for (game of games(); track game.id) {
+        @for (game of visibleGames(); track game.id) {
           <article class="card movie-card game-card" [aria-label]="game.title">
             <figure class="game-card__cover">
               <img
