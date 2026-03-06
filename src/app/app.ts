@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { GameCard } from '../game/game-card.component';
 import { Game } from '../game/game.model';
+import { GameSection } from '../layouts/game-section/game-section';
+import { NgOptimizedImage } from '@angular/common';
 
 // ==============================
 // DECORATEUR COMPONENT
@@ -25,7 +27,7 @@ import { Game } from '../game/game.model';
   // - Un signal change
   // - Un événement se produit
 
-  imports: [GameCard],
+  imports: [NgOptimizedImage,GameCard,GameSection],
   // Permet d’utiliser GameCard directement dans le template
 
   templateUrl: './app.template.html',

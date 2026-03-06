@@ -53,37 +53,17 @@
       </div>
     </section>
 
-    <section aria-labelledby="titre-catalogue" class="wishflix-catalogue">
-      <div class="wishflix-catalogue__header">
-        <h2 id="titre-catalogue" class="wishflix-catalogue__title">Catalogue de jeux</h2>
-        <p class="wishflix-catalogue__subtitle">Decouvre notre selection de jeux video</p>
-      </div>
+    <game-section>
+      <button type="button" class="btn btn-primary" (click)="filterByAvailibility()">
+        {{ filterAvailibilityLabel() }}
+      </button>
 
-      <div
-        class="stats shadow wishflix-catalogue__stats"
-        role="group"
-        aria-label="Statistiques catalogue"
-      >
-        <button type="button" class="btn btn-primary" (click)="filterByAvailibility()">
-          {{ filterAvailibilityLabel() }}
-        </button>
-        <div class="stat">
-          <div class="stat-title">Jeux disponibles</div>
-          <div class="stat-value text-primary">{{ visibleGames().length }}</div>
-        </div>
+      {{ visibleGames().length }}
 
-        <div class="stat">
-          <div class="stat-title">Ma Wishlist</div>
-          <div class="stat-value text-accent">0</div>
-        </div>
-      </div>
-
-      <div class="wishflix-catalogue__grid">
-        @for (game of visibleGames(); track game.id) {
-          <game-card [game]="game"></game-card>
-        }
-      </div>
-    </section>
+      @for (game of visibleGames(); track game.id) {
+        <game-card [game]="game"></game-card>
+      }
+    </game-section>
   </main>
   <footer class="wishflix-footer" aria-label="Pied de page">
     <p class="wishflix-footer__text">WishFlix</p>
