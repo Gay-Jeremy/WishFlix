@@ -1,6 +1,8 @@
 <div class="wishflix-shell">
   <header class="navbar wishflix-shell__navbar" aria-label="Navigation principale">
     <div class="navbar-start">
+      <!-- Interpolation: affichage d'une valeur TypeScript dans le template -->
+      <!-- https://angular.dev/guide/templates/binding -->
       <p class="wishflix-shell__brand">{{ nomApplication }}</p>
       <span class="wishflix-shell__tagline">Gaming</span>
     </div>
@@ -32,7 +34,7 @@
             <span class="badge badge-outline">PC, PS5, Xbox</span>
           </div>
 
-          <h1 id="titre-hero" class="wishflix-hero__title">Cyber Nexus 2077</h1>
+          <h1 id="titre-hero" class="wishflix-hero__title">The Witcher</h1>
           <p class="wishflix-hero__slogan">
             Bienvenue sur {{ nomApplication }}. Decouvre une megalopole en guerre, des choices
             moraux extremes et des combats ultra-dynamiques.
@@ -53,14 +55,18 @@
       </div>
     </section>
 
-    <game-section title = "Catalogue de jeux" subtitle = "Découvre notre selection de jeux">
+    <game-section title="Catalogue de Jeux" subtitle="Decouvre notre selection de jeux video">
       <!-- <button type="button" class="btn btn-primary" (click)="filterByAvailibility()">
         {{ filterAvailibilityLabel() }}
-      </button>
+      </button> -->
 
-      {{ visibleGames().length }} -->
+      <!-- {{ visibleGames().length }} -->
 
+      <!-- Control flow @for: boucle template avec track pour optimiser le rendu -->
+      <!-- https://angular.dev/guide/templates/control-flow -->
       @for (game of visibleGames(); track game.id) {
+        <!-- Property binding: on passe chaque objet Game au composant enfant via son input `game`. -->
+        <!-- Pour aller plus loin: https://angular.dev/guide/templates/binding -->
         <game-card [game]="game"></game-card>
       }
     </game-section>

@@ -1,4 +1,3 @@
-// TEST UI
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameSection } from './game-section';
@@ -9,9 +8,8 @@ describe('GameSection', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GameSection]
-    })
-    .compileComponents();
+      imports: [GameSection],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GameSection);
     component = fixture.componentInstance;
