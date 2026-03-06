@@ -53,12 +53,12 @@
       </div>
     </section>
 
-    <game-section>
-      <button type="button" class="btn btn-primary" (click)="filterByAvailibility()">
+    <game-section title = "Catalogue de jeux" subtitle = "Découvre notre selection de jeux">
+      <!-- <button type="button" class="btn btn-primary" (click)="filterByAvailibility()">
         {{ filterAvailibilityLabel() }}
       </button>
 
-      {{ visibleGames().length }}
+      {{ visibleGames().length }} -->
 
       @for (game of visibleGames(); track game.id) {
         <game-card [game]="game"></game-card>
