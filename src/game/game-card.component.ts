@@ -2,6 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { Game } from './game.model';
 import { FlixButton } from '../ui/button/flix-button';
+import { RouterLink } from "@angular/router";
 
 // @Component relie la classe TypeScript au template de la carte.
 // Angular cree une instance par jeu affiche et applique les bindings definis dans le HTML associe.
@@ -12,7 +13,7 @@ import { FlixButton } from '../ui/button/flix-button';
   // Angular peut mieux gerer priorite, dimensions et stabilite visuelle pendant le rendu.
   // Dans WishFlix, les affiches restent fluides et limitent les sauts de layout dans la grille.
   // Pour aller plus loin: https://angular.dev/guide/image-optimization
-  imports: [NgOptimizedImage, FlixButton],
+  imports: [NgOptimizedImage, FlixButton, RouterLink],
   selector: 'game-card',
   templateUrl: './game-card.template.html',
 })
