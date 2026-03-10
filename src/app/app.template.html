@@ -1,15 +1,10 @@
 <div class="wishflix-shell">
   <header class="navbar wishflix-shell__navbar" aria-label="Navigation principale">
     <div class="navbar-start">
-<<<<<<< HEAD
-      <!-- Interpolation: affichage d'une valeur TypeScript dans le template -->
-      <!-- https://angular.dev/guide/templates/binding -->
-=======
       <!-- Interpolation: affiche une valeur TypeScript directement dans le template. -->
       <!-- Angular synchronise automatiquement cette valeur quand l'etat du composant evolue. -->
       <!-- Dans WishFlix, le nom de marque reste coherent sans mise a jour DOM imperative. -->
       <!-- Pour aller plus loin: https://angular.dev/guide/templates/binding -->
->>>>>>> 81dec8eadfb13c6709b8df64e88907c924062cb4
       <p class="wishflix-shell__brand">{{ nomApplication }}</p>
       <span class="wishflix-shell__tagline">Gaming</span>
     </div>
@@ -18,77 +13,7 @@
   </header>
 
   <main class="wishflix-main" id="contenu-principal">
-<<<<<<< HEAD
-    <section class="hero wishflix-hero" aria-labelledby="titre-hero">
-      <figure class="wishflix-hero__backdrop">
-        <img
-          ngSrc="https://via.assets.so/game.png?id=42&q=95&w=1920&h=1080&fit=cover"
-          alt="Backdrop du jeu mis en avant Cyber Nexus 2077"
-          width="1920"
-          height="1080"
-          priority
-        />
-      </figure>
-      <div class="wishflix-hero__veil" aria-hidden="true"></div>
-
-      <div class="hero-content wishflix-hero__content">
-        <div class="wishflix-hero__text">
-          <p class="wishflix-hero__kicker">NOUVEAUTE WISHFLIX</p>
-          <div class="wishflix-hero__meta">
-            <span class="badge badge-primary">A la une</span>
-            <span class="badge badge-ghost">Action RPG</span>
-            <span class="badge badge-outline">PC, PS5, Xbox</span>
-          </div>
-
-          <h1 id="titre-hero" class="wishflix-hero__title">The Witcher</h1>
-          <p class="wishflix-hero__slogan">
-            Bienvenue sur {{ nomApplication }}. Decouvre une megalopole en guerre, des choices
-            moraux extremes et des combats ultra-dynamiques.
-          </p>
-          <p class="wishflix-hero__description">
-            Cette semaine, plonge dans Cyber Nexus 2077: une aventure futuriste avec une ville
-            ouverte, des choix narratifs et des combats intenses.
-          </p>
-
-          <p class="wishflix-hero__details">2023 | 4.5/5 | 42h d'histoire principale</p>
-
-          <div class="wishflix-hero__actions">
-            <flix-button type="primary" size="lg">Lancer la lecture</flix-button>
-            <flix-button type="outline" size="lg">Plus d'infos</flix-button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <game-section title="Catalogue de Jeux" subtitle="Decouvre notre selection de jeux video">
-      <flix-button filter type="primary" (click)="filterByAvailibility()">
-        {{ filterAvailibilityLabel() }}
-      </flix-button>
-
-      <!-- <ng-container stat-game-count-label> Nombre total de jeux </ng-container> -->
-      <ng-container stat-game-count>
-        {{ visibleGames().length }}
-      </ng-container>
-
-      <ng-container stat-wishlist-count>
-        {{ favoriteGameIds().length }}
-      </ng-container>
-
-      <!-- Control flow @for: boucle template avec track pour optimiser le rendu -->
-      <!-- https://angular.dev/guide/templates/control-flow -->
-      @for (game of visibleGames(); track game.id) {
-        <!-- Property binding: on passe chaque objet Game au composant enfant via son input `game`. -->
-        <!-- Pour aller plus loin: https://angular.dev/guide/templates/binding -->
-        <game-card
-          [game]="game"
-          [isFavorite]="isFavorite(game.id)"
-          (favorite)="toggleFavorite($event)"
-        ></game-card>
-      }
-    </game-section>
-=======
     <router-outlet />
->>>>>>> 81dec8eadfb13c6709b8df64e88907c924062cb4
   </main>
   <footer class="wishflix-footer" aria-label="Pied de page">
     <p class="wishflix-footer__text">WishFlix</p>

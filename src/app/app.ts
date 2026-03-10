@@ -1,10 +1,10 @@
-<<<<<<< HEAD
 import { Component, computed, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { GameCard } from '../game/game-card.component';
 import { Game } from '../game/game.model';
 import { GameSection } from '../layouts/game-section/game-section';
 import { FlixButton } from '../ui/button/flix-button';
+import { RouterOutlet } from "@angular/router";
 
 // @Component relie la classe TypeScript au template HTML/CSS de l'interface.
 // C'est le point d'entree pour declarer la vue et les imports utilises par ce composant.
@@ -14,23 +14,7 @@ import { FlixButton } from '../ui/button/flix-button';
   // On importe explicitement les composants utilises dans le template.
   // Cela rend les dependances visibles et limite les imports implicites.
   // Pour aller plus loin: https://angular.dev/guide/components/importing
-  imports: [NgOptimizedImage, GameCard, GameSection, FlixButton],
-=======
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
-// @Component relie la classe TypeScript a la vue HTML associee.
-// Angular instancie ce composant racine pour piloter l'etat et le rendu de l'ecran principal.
-// Dans WishFlix, App orchestre le hero, le filtre et la grille de jeux dans un seul point d'entree.
-// Pour aller plus loin: https://angular.dev/essentials/components
-@Component({
-  selector: 'app-root',
-  // En standalone, imports declare explicitement les composants utilises par le template.
-  // Cette liste rend les dependances visibles et evite les imports magiques de module global.
-  // Dans WishFlix, on comprend vite quelles briques composent la home (GameCard, GameSection, FlixButton).
-  // Pour aller plus loin: https://angular.dev/guide/components/importing
-  imports: [RouterOutlet],
->>>>>>> 81dec8eadfb13c6709b8df64e88907c924062cb4
+  imports: [NgOptimizedImage, GameCard, GameSection, FlixButton, RouterOutlet],
   templateUrl: './app.template.html',
 })
 
