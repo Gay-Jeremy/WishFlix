@@ -1,26 +1,33 @@
-import { Component, input } from '@angular/core';
-import { FlixButton } from '../../ui/button/flix-button';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-// Composant layout: centralise la structure commune d'une section de catalogue.
-// On evite de dupliquer le meme HTML dans plusieurs ecrans ou futures pages.
-// Dans WishFlix, ce conteneur permet d'ajouter de nouvelles rangees sans copier-coller.
-// Pour aller plus loin: https://angular.dev/essentials/components
 @Component({
   selector: 'game-section',
-  imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './game-section.html',
   styleUrl: './game-section.css',
 })
 export class GameSection {
-  // input.required impose un titre obligatoire pour garantir un en-tete toujours present.
-  // Angular signale l'oubli au build au lieu de laisser un rendu incomplet en runtime.
-  // Dans WishFlix, chaque section garde un repere clair pour l'utilisateur et l'accessibilite.
-  // Pour aller plus loin: https://angular.dev/guide/components/inputs
-  title = input.required<string>();
+  /**
+   * input.required impose un contrat clair: chaque section doit avoir un titre.
+   * Le composant reste réutilisable car le sous-titre est optionnel avec une valeur par défaut.
+   * Dans WishFlix, ce pattern homogénéise les blocs de page sans dupliquer du HTML.
+   * Pour aller plus loin: https://angular.dev/guide/components/inputs
+   */
+  readonly title = input.required<string>();
+  readonly subtitle = input<string>('');
 
-  // Input optionnel: le parent peut fournir un sous-titre selon le contexte d'affichage.
-  // Le composant reste flexible sans multiplier les variantes de section.
-  // Dans WishFlix, on peut enrichir certaines rangees sans alourdir les plus simples.
-  // Pour aller plus loin: https://angular.dev/guide/components/inputs
-  subtitle = input<string>();
+  /**
+   * computed génère un id stable dérivé du titre pour relier section et heading via aria-labelledby.
+   * On obtient une meilleure accessibilité sans gérer d'état supplémentaire.
+   * Cette dérivation automatique évite aussi les collisions d'id écrits à la main.
+   * Pour aller plus loin: https://angular.dev/guide/signals#computed-signals
+   */
+  readonly headingId = computed(() => {
+    const normalized = this.title()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+    return `section-${normalized || 'heading'}`;
+  });
 }

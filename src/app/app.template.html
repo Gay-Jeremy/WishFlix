@@ -1,21 +1,50 @@
 <div class="wishflix-shell">
   <header class="navbar wishflix-shell__navbar" aria-label="Navigation principale">
     <div class="navbar-start">
-      <!-- Interpolation: affiche une valeur TypeScript directement dans le template. -->
-      <!-- Angular synchronise automatiquement cette valeur quand l'etat du composant evolue. -->
-      <!-- Dans WishFlix, le nom de marque reste coherent sans mise a jour DOM imperative. -->
-      <!-- Pour aller plus loin: https://angular.dev/guide/templates/binding -->
-      <p class="wishflix-shell__brand">{{ nomApplication }}</p>
-      <span class="wishflix-shell__tagline">Gaming</span>
+      <a class="wishflix-shell__brand" routerLink="/">{{ appName }}</a>
+      <span class="wishflix-shell__tagline">Gaming catalog</span>
     </div>
 
-    <div class="navbar-end"></div>
+    <nav class="navbar-center wishflix-shell__menu" aria-label="Liens principaux">
+      <a
+        class="wishflix-shell__link"
+        routerLink="/"
+        routerLinkActive="wishflix-shell__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Accueil
+      </a>
+      <a
+        class="wishflix-shell__link"
+        routerLink="/wishlist"
+        routerLinkActive="wishflix-shell__link--active"
+      >
+        Wishlist
+        <span class="badge badge-secondary badge-sm">{{ wishlistCount() }}</span>
+      </a>
+    </nav>
+
+    <div class="navbar-end wishflix-shell__user">
+      <span class="wishflix-shell__user-label">{{ userLabel() }}</span>
+
+      <!--
+        @if pilote l'affichage conditionnel directement dans le template sans *ngIf historique.
+        Le shell garde une logique lisible: action login si anonyme, logout si authentifié.
+        Dans WishFlix, cette règle est centralisée dans la navbar et suit le signal isAuthenticated.
+        Pour aller plus loin: https://angular.dev/guide/templates/control-flow
+      -->
+      @if (isAuthenticated()) {
+        <flix-button type="ghost" size="sm" (click)="logout()">Se deconnecter</flix-button>
+      } @else {
+        <a class="btn btn-primary btn-sm" routerLink="/login">Se connecter</a>
+      }
+    </div>
   </header>
 
   <main class="wishflix-main" id="contenu-principal">
     <router-outlet />
   </main>
   <footer class="wishflix-footer" aria-label="Pied de page">
-    <p class="wishflix-footer__text">WishFlix</p>
+    <p class="wishflix-footer__text">WishFlix - Angular</p>
   </footer>
 </div>

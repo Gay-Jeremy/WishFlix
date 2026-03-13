@@ -1,12 +1,18 @@
-<!-- src/pages/game-detail/game-detail.page.html -->
-@if (game()) {
-  <section class="wish-detail mt-8">
+<!--
+  @if (...; as variable) crée un alias local (selectedGame) pour éviter de relire game() partout.
+  Ce pattern rend le template plus lisible et gère explicitement le cas "introuvable" dans @else.
+  Dans WishFlix, l'UX reste claire: fiche complète si id valide, message guidé sinon.
+  Pour aller plus loin: https://angular.dev/guide/templates/control-flow
+-->
+@if (game(); as selectedGame) {
+  <section class="wish-detail">
     <figure class="wish-detail__backdrop">
       <img
-        src="https://via.assets.so/game.png?id=42&q=95&w=1600&h=900&fit=cover"
-        alt="Image de couverture de Cyber Nexus 2077"
+        [ngSrc]="selectedGame.backdropImage"
+        [alt]="'Image de couverture de ' + selectedGame.title"
         width="1600"
         height="900"
+        priority
       />
     </figure>
 
@@ -16,40 +22,43 @@
       <a class="btn btn-ghost btn-sm" routerLink="/">Retour au catalogue</a>
 
       <p class="wish-detail__kicker">Fiche jeu</p>
-      <h1 class="wish-detail__title">{{ game()!.title }}</h1>
+      <h1 class="wish-detail__title">{{ selectedGame.title }}</h1>
 
       <div class="wish-detail__meta">
-        <span class="badge badge-primary">{{ game()!.genre }}</span>
-        <span class="badge badge-outline">{{ game()!.year }}</span>
-        <span class="badge badge-ghost">{{ game()!.platform }}</span>
+        <span class="badge badge-primary">{{ selectedGame.category }}</span>
+        <span class="badge badge-outline">{{ selectedGame.year }}</span>
+        <span class="badge badge-ghost">{{ selectedGame.platforms.join(', ') }}</span>
       </div>
 
-      <p class="wish-detail__description">
-        {{ game()!.synopsis }}
-      </p>
+      <p class="wish-detail__description">{{ selectedGame.description }}</p>
 
       <ul class="wish-detail__facts" aria-label="Informations sur le jeu">
-        <li><strong>Note:</strong> {{ game()!.rating }}/5</li>
-        <li><strong>Etat:</strong> {{ game()!.available }}</li>
+        <li>
+          <strong>Note:</strong>
+          {{ selectedGame.rating }}/5
+        </li>
+        <li>
+          <strong>Duree:</strong>
+          {{ selectedGame.playtime }}
+        </li>
+        <li>
+          <strong>Etat:</strong>
+          {{ selectedGame.available ? 'Disponible' : 'Bientot disponible' }}
+        </li>
       </ul>
 
       <div class="wish-detail__actions">
-        <flix-button type="secondary" (click)="catalog.toggleFavorite(game()!.id)">
-          @if (catalog.isFavorite(game()!.id)) {
-            Retirer de la wishlist
-          } @else {
-            Ajouter a la wishlist
-          }
+        <flix-button type="secondary" (click)="toggleWishlist(selectedGame.id)">
+          {{ isFavorite(selectedGame.id) ? 'Retirer de la wishlist' : 'Ajouter a la wishlist' }}
         </flix-button>
-
-        <a class="btn btn-outline" href="/wishlist">Voir ma wishlist</a>
+        <a class="btn btn-outline" routerLink="/wishlist">Voir ma wishlist</a>
       </div>
     </div>
   </section>
 } @else {
-  <section class="wish-detail__missing mt-8">
+  <section class="wish-detail__missing">
     <h1>Jeu introuvable</h1>
-    <p>Ce jeu n existe pas dans le catalogue.</p>
-    <a class="btn btn-primary" href="/">Retour a l accueil</a>
+    <p>Ce jeu n existe pas dans le catalogue local.</p>
+    <a class="btn btn-primary" routerLink="/">Retour a l accueil</a>
   </section>
 }
